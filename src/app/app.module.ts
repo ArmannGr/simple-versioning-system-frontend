@@ -13,7 +13,6 @@ import {FileLandingZoneComponent} from "./file-landing-zone/file-landing-zone.co
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {MatDialogModule} from '@angular/material/dialog';
-import { AddFileComponent } from './dialogs/add-file/add-file.component';
 import { EditFileComponent } from './dialogs/edit-file/edit-file.component';
 import { RevertFileComponent } from './dialogs/revert-file/revert-file.component';
 import { CompareFilesComponent } from './dialogs/compare-files/compare-files.component';
@@ -23,7 +22,6 @@ import { CompareFilesComponent } from './dialogs/compare-files/compare-files.com
   declarations: [
     AppComponent,
     FileLandingZoneComponent,
-    AddFileComponent,
     EditFileComponent,
     RevertFileComponent,
     CompareFilesComponent
