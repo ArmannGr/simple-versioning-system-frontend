@@ -16,7 +16,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { EditFileComponent } from './dialogs/edit-file/edit-file.component';
 import { RevertFileComponent } from './dialogs/revert-file/revert-file.component';
 import { CompareFilesComponent } from './dialogs/compare-files/compare-files.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -26,20 +26,21 @@ import { CompareFilesComponent } from './dialogs/compare-files/compare-files.com
     RevertFileComponent,
     CompareFilesComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatListModule,
-    RouterOutlet,
-    AppRoutingModule,
-    HttpClientModule,
-      MatDialogModule,
-      MatIconModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        MatListModule,
+        RouterOutlet,
+        AppRoutingModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatIconModule,
+        MatSnackBarModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
