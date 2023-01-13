@@ -1,0 +1,29 @@
+<mat-toolbar>
+
+    <span>Versionsverwaltung</span>
+    <span class="example-spacer"></span>
+
+</mat-toolbar>
+<br>
+<br>
+
+<button mat-raised-button class="btn" color="primary" style="margin-left: 5%">Aktion1 </button>
+<button mat-raised-button class="btn" color="primary">Aktion2 </button>
+<button mat-raised-button class="btn" color="primary">Aktion3 </button>
+<button mat-raised-button class="btn" color="primary">Aktion4 </button>
+
+<br>
+<br>
+<mat-card class="mat-card">
+    <mat-card-content>
+        <p>Dateiübersicht</p>
+        <mat-selection-list #files>
+            <mat-list-option *ngFor="let file of fileCollection">
+                {{file}}
+
+            </mat-list-option>
+        </mat-selection-list>
+
+
+    </mat-card-content>
+</mat-card>
