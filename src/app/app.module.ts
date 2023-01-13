@@ -12,11 +12,21 @@ import {RouterOutlet} from "@angular/router";
 import {FileLandingZoneComponent} from "./file-landing-zone/file-landing-zone.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddFileComponent } from './dialogs/add-file/add-file.component';
+import { EditFileComponent } from './dialogs/edit-file/edit-file.component';
+import { RevertFileComponent } from './dialogs/revert-file/revert-file.component';
+import { CompareFilesComponent } from './dialogs/compare-files/compare-files.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileLandingZoneComponent
+    FileLandingZoneComponent,
+    AddFileComponent,
+    EditFileComponent,
+    RevertFileComponent,
+    CompareFilesComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +39,8 @@ import {HttpClientModule} from "@angular/common/http";
     RouterOutlet,
     AppRoutingModule,
     HttpClientModule,
+      MatDialogModule,
+      MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
