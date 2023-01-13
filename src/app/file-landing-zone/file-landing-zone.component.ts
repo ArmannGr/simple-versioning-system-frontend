@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import { AddFileComponent} from "../dialogs/add-file/add-file.component";
 import {EditFileComponent} from "../dialogs/edit-file/edit-file.component";
 import {RevertFileComponent} from "../dialogs/revert-file/revert-file.component";
 import {CompareFilesComponent} from "../dialogs/compare-files/compare-files.component";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-file-landing-zone',
@@ -14,20 +14,12 @@ export class FileLandingZoneComponent implements OnInit {
 
 
   fileCollection: string[] = ['Datei1_v1.txt', 'Datei7_v1.txt', 'DateiA_v2.txt', 'Datei1_v2.txt', 'Datei7_v2.txt', 'DateiA_v3.txt', 'Datei1_v3.txt', 'Datei7_v3.txt', 'DateiA_v5.txt'];
-
-
-  // Refs for Dialogs
-  addFileRef: MatDialogRef<AddFileComponent> | undefined;
+  fileName = '';
   editFileRef: MatDialogRef<EditFileComponent> | undefined;
   revertFileRef: MatDialogRef<RevertFileComponent> | undefined;
   compareFileRef: MatDialogRef<CompareFilesComponent> | undefined;
 
-  constructor(private dialog: MatDialog) {}
-
-    //dialog methods
-openNewFile(){
-    this.addFileRef = this.dialog.open(AddFileComponent);
-}
+  constructor(private dialog: MatDialog, private http: HttpClient) {}
 
 editFile(){
     this.editFileRef = this.dialog.open(EditFileComponent);
@@ -44,4 +36,21 @@ compareFiles(){
   ngOnInit(): void {
   }
 
+    onFileSelected(event) {
+
+        const files :File[] = event.target.files;
+
+        if (Array.from(files).every(value => value.name.includes(".txt"))) {
+
+            this.fileName = files[0].name;
+
+            const formData = new FormData();
+
+            formData.append("thumbnail", files[0]);
+
+            const upload$ = this.http.post("/api/thumbnail-upload", formData);
+
+            upload$.subscribe();
+        }
+    }
 }
