@@ -8,19 +8,27 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
+import {RouterOutlet} from "@angular/router";
+import {FileLandingZoneComponent} from "./file-landing-zone/file-landing-zone.component";
+import {AppRoutingModule} from "./app-routing.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FileLandingZoneComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-      MatToolbarModule,
-      MatIconModule,
-      MatButtonModule,
-      MatCardModule,
-      MatListModule
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatListModule,
+    RouterOutlet,
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
