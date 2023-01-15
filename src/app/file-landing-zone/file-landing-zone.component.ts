@@ -5,6 +5,10 @@ import {RevertFileComponent} from "../dialogs/revert-file/revert-file.component"
 import {CompareFilesComponent} from "../dialogs/compare-files/compare-files.component";
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {TextFile} from "../data/types/TextFile";
+import { DatePipe } from '@angular/common';
+import {FileVersion} from "../data/types/FileVersion";
+import {FileService} from "../data/service/file.service";
 
 
 @Component({
@@ -15,14 +19,17 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class FileLandingZoneComponent implements OnInit {
 
     fileCollection: string[] = ['Datei1_v1.txt', 'Datei7_v1.txt', 'DateiA_v2.txt', 'Datei1_v2.txt', 'Datei7_v2.txt', 'DateiA_v3.txt', 'Datei1_v3.txt', 'Datei7_v3.txt', 'DateiA_v5.txt'];
-    fileName = '';
     editFileRef: MatDialogRef<EditFileComponent> | undefined;
     revertFileRef: MatDialogRef<RevertFileComponent> | undefined;
     compareFileRef: MatDialogRef<CompareFilesComponent> | undefined;
+    newTextFile: TextFile;
+    newFileVersion: FileVersion;
+    fileVersions: FileVersion[];
 
 
 
-    constructor(private dialog: MatDialog, private http: HttpClient, private _snackBar: MatSnackBar) {
+    constructor(private dialog: MatDialog, private http: HttpClient, private _snackBar: MatSnackBar,
+                public datePipe: DatePipe, private fileService: FileService) {
     }
 
     editFile() {
@@ -52,16 +59,20 @@ export class FileLandingZoneComponent implements OnInit {
         const files: File[] = event.target.files;
 
         if (Array.from(files).every(value => value.name.includes(".txt"))) {
+                let file = event.target.files[0];
 
-            this.fileName = files[0].name;
-
-            const formData = new FormData();
-
-            formData.append("thumbnail", files[0]);
-
-            const upload$ = this.http.post("/addFile", formData);
-
-            upload$.subscribe();
+                let fileReader = new FileReader();
+                fileReader.onload = () => {
+                    let currentDateTime =this.datePipe.transform((new Date), 'dd/MM/yyyy h:mm:ss');
+                    this.newFileVersion = new FileVersion(1, fileReader.result.toString(), currentDateTime);
+                    this.fileVersions = [];
+                    this.fileVersions.push(this.newFileVersion);
+                    this.newTextFile = new TextFile(file.name, currentDateTime, this.fileVersions, null, null);
+                    this.fileService.addFile(this.newTextFile).subscribe( response => {
+                        console.log(response);
+                    })
+                }
+                fileReader.readAsText(file);
         } else {
             this.openSnackBar();
         }
