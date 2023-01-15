@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {EditFileComponent} from "../dialogs/edit-file/edit-file.component";
 import {RevertFileComponent} from "../dialogs/revert-file/revert-file.component";
@@ -59,12 +59,11 @@ export class FileLandingZoneComponent implements OnInit {
 
             formData.append("thumbnail", files[0]);
 
-            const upload$ = this.http.post("/api/thumbnail-upload", formData);
+            const upload$ = this.http.post("/addFile", formData);
 
             upload$.subscribe();
         } else {
             this.openSnackBar();
-
         }
     }
 }
