@@ -17,6 +17,7 @@ import { EditFileComponent } from './dialogs/edit-file/edit-file.component';
 import { RevertFileComponent } from './dialogs/revert-file/revert-file.component';
 import { CompareFilesComponent } from './dialogs/compare-files/compare-files.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         MatIconModule,
         MatSnackBarModule
     ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
