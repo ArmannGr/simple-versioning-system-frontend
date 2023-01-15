@@ -12,24 +12,35 @@ import {RouterOutlet} from "@angular/router";
 import {FileLandingZoneComponent} from "./file-landing-zone/file-landing-zone.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
+import {MatDialogModule} from '@angular/material/dialog';
+import { EditFileComponent } from './dialogs/edit-file/edit-file.component';
+import { RevertFileComponent } from './dialogs/revert-file/revert-file.component';
+import { CompareFilesComponent } from './dialogs/compare-files/compare-files.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileLandingZoneComponent
+    FileLandingZoneComponent,
+    EditFileComponent,
+    RevertFileComponent,
+    CompareFilesComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatListModule,
-    RouterOutlet,
-    AppRoutingModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        MatListModule,
+        RouterOutlet,
+        AppRoutingModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatIconModule,
+        MatSnackBarModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

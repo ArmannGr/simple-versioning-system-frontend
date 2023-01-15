@@ -7,16 +7,25 @@
 <br>
 <br>
 
-<button mat-raised-button class="btn" color="primary" style="margin-left: 5%">Aktion1 </button>
-<button mat-raised-button class="btn" color="primary">Aktion2 </button>
-<button mat-raised-button class="btn" color="primary">Aktion3 </button>
-<button mat-raised-button class="btn" color="primary">Aktion4 </button>
+<input  type="file"
+        hidden="true"
+        class="file-input"
+        (change)="onFileSelected($event)"
+        multiple="multiple"
+        #fileUpload>
+<button mat-raised-button class="btn" color="primary" style="margin-left: 5%" (click)="fileUpload.click()"><mat-icon>upload_files</mat-icon> </button>
+<button mat-raised-button class="btn" color="primary" (click)="editFile()">Datei edit </button>
+<button mat-raised-button class="btn" color="primary" (click)="revertFile()">zurücksetzen auf ... </button>
+<button mat-raised-button class="btn" color="primary"  (click)="compareFiles()"> Vergleichen </button>
+<button mat-raised-button class="btn" color="primary"> <mat-icon>download</mat-icon> </button>
 
+<br>
+<br>
 <br>
 <br>
 <mat-card class="mat-card">
     <mat-card-content>
-        <p>Dateiübersicht</p>
+        <h2 class="list-header">Dateiübersicht</h2>
         <mat-selection-list #files>
             <mat-list-option *ngFor="let file of fileCollection">
                 {{file}}
@@ -27,3 +36,4 @@
 
     </mat-card-content>
 </mat-card>
+
