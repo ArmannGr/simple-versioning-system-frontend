@@ -21,6 +21,7 @@ import { DatePipe } from '@angular/common';
 import {MatTableModule} from "@angular/material/table";
 import {MatChipsModule} from "@angular/material/chips";
 import { FileComponent } from './file/file.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { FileComponent } from './file/file.component';
         MatIconModule,
         MatSnackBarModule,
         MatTableModule,
-        MatChipsModule
+        MatChipsModule,
+        FormsModule
     ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

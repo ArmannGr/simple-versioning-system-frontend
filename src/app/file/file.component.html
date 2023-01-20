@@ -9,7 +9,7 @@
 <button mat-raised-button class="btn" color="primary" style="margin-left: 5%" (click)="editFile()">Datei edit </button>
 <button mat-raised-button class="btn" color="primary" (click)="revertFile()">zurücksetzen auf ... </button>
 <button mat-raised-button class="btn" color="primary"  (click)="compareFiles()"> Vergleichen </button>
-<button mat-raised-button class="btn" color="primary" (click)="convertStringToFile(1)"> <mat-icon>download</mat-icon> </button>
+<button mat-raised-button class="btn" color="primary" (click)="convertStringToFile()"> <mat-icon>download</mat-icon> </button>
 
 <br>
 <br>
@@ -18,8 +18,8 @@
 <mat-card class="mat-card">
     <mat-card-content>
         <h2>Dateiübersicht</h2>
-        <mat-selection-list #files>
-            <mat-list-option *ngFor="let file of fileVersion">
+        <mat-selection-list #files [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
+            <mat-list-option *ngFor="let file of fileVersion" [value]="file.versionId">
                 {{fileName}} -{{file.versionId}}-
             </mat-list-option>
         </mat-selection-list>

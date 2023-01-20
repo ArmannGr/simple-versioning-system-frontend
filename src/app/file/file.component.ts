@@ -6,7 +6,6 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FileVersion} from "../data/types/FileVersion";
 import {FileService} from "../data/service/file.service";
 import { ActivatedRoute } from '@angular/router';
-import * as fs from "fs"
 
 @Component({
   selector: 'app-file',
@@ -20,6 +19,8 @@ export class FileComponent implements OnInit {
   compareFileRef: MatDialogRef<CompareFilesComponent> | undefined;
   fileVersion: FileVersion[] = [];
   fileName: string = '';
+  selectedOptions = [];
+  selectedOption;
 
   constructor(private dialog: MatDialog, private fileService: FileService, private route: ActivatedRoute) { }
 
@@ -40,10 +41,43 @@ export class FileComponent implements OnInit {
       })
     })
   }
-  convertStringToFile(versionId: number){
-    fs.writeFileSync(this.fileName, this.fileVersion.filter(version => version.versionId === versionId)[0].fileContent);
-    console.log(fs.writeFileSync(this.fileName, this.fileVersion.filter(version => version.versionId === versionId)[0].fileContent));
 
+  onNgModelChange($event){
+    this.selectedOption=$event;
+  }
+
+  convertStringToFile(){
+    let versionId = this.selectedOption[0];
+    this.dynamicDownloadTxt(this.fileName + ' -' + this.fileVersion.filter(version => version.versionId === versionId)[0].versionId + '- ' ,this.fileVersion.filter(version => version.versionId === versionId)[0].fileContent);
+
+  }
+  private setting = {
+    element: {
+      dynamicDownload: null as HTMLElement
+    }
+  }
+
+  dynamicDownloadTxt(fileName: string, content: string) {
+      this.dyanmicDownloadByHtmlTag({
+        fileName: fileName,
+        text: content
+      });
+  }
+
+  private dyanmicDownloadByHtmlTag(arg: {
+    fileName: string,
+    text: string
+  }) {
+    if (!this.setting.element.dynamicDownload) {
+      this.setting.element.dynamicDownload = document.createElement('a');
+    }
+    const element = this.setting.element.dynamicDownload;
+    const fileType = arg.fileName.indexOf('.json') > -1 ? 'text/json' : 'text/plain';
+    element.setAttribute('href', `data:${fileType};charset=utf-8,${encodeURIComponent(arg.text)}`);
+    element.setAttribute('download', arg.fileName);
+
+    var event = new MouseEvent("click");
+    element.dispatchEvent(event);
   }
 
 
