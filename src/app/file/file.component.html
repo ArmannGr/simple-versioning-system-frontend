@@ -1,0 +1,27 @@
+<mat-toolbar>
+
+    <span>Versionsverwaltung</span>
+    <span class="example-spacer"></span>
+
+</mat-toolbar>
+<br>
+<br>
+<button mat-raised-button class="btn" color="primary" style="margin-left: 5%" (click)="editFile()">Datei edit </button>
+<button mat-raised-button class="btn" color="primary" (click)="revertFile()">zurücksetzen auf ... </button>
+<button mat-raised-button class="btn" color="primary"  (click)="compareFiles()"> Vergleichen </button>
+<button mat-raised-button class="btn" color="primary"> <mat-icon>download</mat-icon> </button>
+
+<br>
+<br>
+<br>
+<br>
+<mat-card class="mat-card">
+    <mat-card-content>
+        <h2>Dateiübersicht</h2>
+        <mat-selection-list #files>
+            <mat-list-option *ngFor="let file of fileVersion">
+                {{fileName}} -{{file.versionId}}-
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-card-content>
+</mat-card>
