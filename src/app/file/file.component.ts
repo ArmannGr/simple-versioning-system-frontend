@@ -6,6 +6,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FileVersion} from "../data/types/FileVersion";
 import {FileService} from "../data/service/file.service";
 import { ActivatedRoute } from '@angular/router';
+import * as fs from "fs"
 
 @Component({
   selector: 'app-file',
@@ -39,6 +40,12 @@ export class FileComponent implements OnInit {
       })
     })
   }
+  convertStringToFile(versionId: number){
+    fs.writeFileSync(this.fileName, this.fileVersion.filter(version => version.versionId === versionId)[0].fileContent);
+    console.log(fs.writeFileSync(this.fileName, this.fileVersion.filter(version => version.versionId === versionId)[0].fileContent));
+
+  }
+
 
   editFile() {
     this.editFileRef = this.dialog.open(EditFileComponent);
