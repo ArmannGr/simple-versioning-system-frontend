@@ -94,7 +94,7 @@ export class FileComponent implements OnInit {
 
   resetFile(){
     this.fileService.resetFileToFormerVersion(this.textFile, this.selectedOption[0]).subscribe( tach => {
-      console.log(tach);
+      window.location.reload();
     });
   }
 
