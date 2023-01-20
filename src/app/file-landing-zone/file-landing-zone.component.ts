@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {EditFileComponent} from "../dialogs/edit-file/edit-file.component";
+import {RevertFileComponent} from "../dialogs/revert-file/revert-file.component";
+import {CompareFilesComponent} from "../dialogs/compare-files/compare-files.component";
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TextFile} from "../data/types/TextFile";
@@ -14,7 +17,11 @@ import {FileService} from "../data/service/file.service";
   styleUrls: ['./file-landing-zone.component.css']
 })
 export class FileLandingZoneComponent implements OnInit {
-    fileCollection: TextFile[] = [];
+
+    fileCollection: string[] = ['Datei1_v1.txt', 'Datei7_v1.txt', 'DateiA_v2.txt', 'Datei1_v2.txt', 'Datei7_v2.txt', 'DateiA_v3.txt', 'Datei1_v3.txt', 'Datei7_v3.txt', 'DateiA_v5.txt'];
+    editFileRef: MatDialogRef<EditFileComponent> | undefined;
+    revertFileRef: MatDialogRef<RevertFileComponent> | undefined;
+    compareFileRef: MatDialogRef<CompareFilesComponent> | undefined;
     newTextFile: TextFile;
     newFileVersion: FileVersion;
     fileVersions: FileVersion[];
@@ -23,6 +30,18 @@ export class FileLandingZoneComponent implements OnInit {
 
     constructor(private dialog: MatDialog, private http: HttpClient, private _snackBar: MatSnackBar,
                 public datePipe: DatePipe, private fileService: FileService) {
+    }
+
+    editFile() {
+        this.editFileRef = this.dialog.open(EditFileComponent);
+    }
+
+    revertFile() {
+        this.revertFileRef = this.dialog.open(RevertFileComponent);
+    }
+
+    compareFiles() {
+        this.compareFileRef = this.dialog.open(CompareFilesComponent);
     }
     openSnackBar() {
         const message  = 'Nur Textdateien'
@@ -33,9 +52,6 @@ export class FileLandingZoneComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.fileService.getAllFiles().subscribe(files => {
-            this.fileCollection = files;
-        })
     }
 
     onFileSelected(event) {
@@ -54,7 +70,6 @@ export class FileLandingZoneComponent implements OnInit {
                     this.newTextFile = new TextFile(file.name, currentDateTime, this.fileVersions, null, null);
                     this.fileService.addFile(this.newTextFile).subscribe( response => {
                         console.log(response);
-                        window.location.reload();
                     })
                 }
                 fileReader.readAsText(file);
