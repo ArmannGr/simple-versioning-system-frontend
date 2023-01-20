@@ -16,4 +16,8 @@ export class FileService {
   getAllFiles(){
     return(this.http.get<any>('api/getAllFiles'));
   }
+
+  resetFileToFormerVersion(textFile: TextFile, versionId: number){
+    return(this.http.post('api/resetFileToFormerVersion/' + versionId, textFile));
+  }
 }

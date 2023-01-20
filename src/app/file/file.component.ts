@@ -6,6 +6,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FileVersion} from "../data/types/FileVersion";
 import {FileService} from "../data/service/file.service";
 import { ActivatedRoute } from '@angular/router';
+import {TextFile} from "../data/types/TextFile";
 
 @Component({
   selector: 'app-file',
@@ -21,12 +22,14 @@ export class FileComponent implements OnInit {
   fileName: string = '';
   selectedOptions = [];
   selectedOption;
+  textFile: TextFile;
 
   constructor(private dialog: MatDialog, private fileService: FileService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.fileService.getAllFiles().subscribe(files => {
       this.route.params.subscribe( (params) => {
+            this.textFile = files.filter(file => file.name === params['fileName'])[0];
             this.fileVersion = files.filter(file => file.name === params['fileName'])[0].versions;
             this.fileVersion.sort((n1,n2) => {
               if (n1.versionId < n2.versionId) {
@@ -85,12 +88,14 @@ export class FileComponent implements OnInit {
     this.editFileRef = this.dialog.open(EditFileComponent);
   }
 
-  revertFile() {
-    this.revertFileRef = this.dialog.open(RevertFileComponent);
-  }
-
   compareFiles() {
     this.compareFileRef = this.dialog.open(CompareFilesComponent);
+  }
+
+  resetFile(){
+    this.fileService.resetFileToFormerVersion(this.textFile, this.selectedOption[0]).subscribe( tach => {
+      console.log(tach);
+    });
   }
 
 }
