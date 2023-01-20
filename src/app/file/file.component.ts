@@ -26,6 +26,15 @@ export class FileComponent implements OnInit {
     this.fileService.getAllFiles().subscribe(files => {
       this.route.params.subscribe( (params) => {
             this.fileVersion = files.filter(file => file.name === params['fileName'])[0].versions;
+            this.fileVersion.sort((n1,n2) => {
+              if (n1.versionId < n2.versionId) {
+                return 1;
+              }
+              if (n1.versionId > n2.versionId) {
+                return -1;
+              }
+              return 0;
+            })
             this.fileName = params['fileName'];
       })
     })
