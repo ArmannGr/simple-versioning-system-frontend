@@ -1,1 +1,17 @@
-<p>Hier soll dann die Möglichkeit zum Ändern angeboten werden --> Lock muss gesetzt werden </p>
+<h1 class="header" mat-dialog-title> Ändern der Textdatei:      {{OBJ_name}}</h1>
+
+<!-- content-->
+<ngx-monaco-editor style="height: 80%"
+                   id="editor1"
+                   [options]="inputOptions"
+                   [(ngModel)]="text"
+></ngx-monaco-editor>
+
+<div mat-dialog-actions>
+    <button class="btn-close" mat-raised-button mat-dialog-close (click)="closeCancelAction()">schließen</button>
+    <button class="btn-save" mat-raised-button mat-dialog-close (click)="closeSaveAction()">speichern</button>
+</div>
+
+
+
+

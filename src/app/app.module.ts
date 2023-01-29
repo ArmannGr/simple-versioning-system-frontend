@@ -22,6 +22,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatChipsModule} from "@angular/material/chips";
 import { FileComponent } from './file/file.component';
 import {FormsModule} from "@angular/forms";
+import {MonacoEditorModule} from "ngx-monaco-editor";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {FormsModule} from "@angular/forms";
         MatSnackBarModule,
         MatTableModule,
         MatChipsModule,
-        FormsModule
+        FormsModule,
+        MonacoEditorModule.forRoot()
     ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

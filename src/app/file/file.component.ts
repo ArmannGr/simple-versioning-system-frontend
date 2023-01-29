@@ -85,7 +85,24 @@ export class FileComponent implements OnInit {
 
 
   editFile() {
-    this.editFileRef = this.dialog.open(EditFileComponent);
+    //Textfile locken hier
+    this.editFileRef = this.dialog.open(EditFileComponent, {
+      width: '1000px',
+      height: '800px',
+      data: {
+        //Daten an dialog übergeben
+        versionId: this.selectedOption[0],
+        name: this.textFile.name,
+       // createdAt: this.textFile.createdAt,
+       // versionCount: this.textFile.versionCount,
+       // locked: this.textFile.locked,
+       // versions: this.fileVersion.filter(obj => obj.versionId === this.selectedOption[0])
+        versions: this.textFile.versions.filter((obj => obj.versionId === this.selectedOption[0]))
+      }
+    });
+
+
+    // nach close dialog die textfile wieder unlocken oder wird diese vom backed automatisch unlocked
   }
 
   compareFiles() {

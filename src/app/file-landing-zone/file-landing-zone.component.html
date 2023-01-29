@@ -1,12 +1,9 @@
 <mat-toolbar>
-
     <span>Versionsverwaltung</span>
     <span class="example-spacer"></span>
-
 </mat-toolbar>
 <br>
 <br>
-
 <input  type="file"
         hidden="true"
         class="file-input"
@@ -14,14 +11,13 @@
         multiple="multiple"
         #fileUpload>
 <button mat-raised-button class="btn" color="primary" style="margin-left: 5%" (click)="fileUpload.click()"><mat-icon>upload_files</mat-icon> </button>
-
 <br>
 <br>
 <br>
 <br>
 <mat-card class="mat-card">
     <mat-card-content>
-        <h2>Dateiübersicht</h2>
+        <h2>Alle Dateien:</h2>
         <mat-chip-list class="mat-chip-list-stacked">
             <mat-chip *ngFor="let file of fileCollection" selected color="primary" [routerLink]="'/'+ file.name">
                 {{file.name}}
