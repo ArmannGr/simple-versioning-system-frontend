@@ -1,6 +1,9 @@
 import { Component, OnInit,Inject, ViewEncapsulation } from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {FileVersion} from "../../data/types/FileVersion";
+import {TextFile} from "../../data/types/TextFile";
+import { FileService} from "../../data/service/file.service";
+import {FileComponent} from "../../file/file.component";
 
 
 @Component({
@@ -11,16 +14,17 @@ import {FileVersion} from "../../data/types/FileVersion";
 })
 export class EditFileComponent implements OnInit {
 
-  // from injected object
-  OBJ_versionId: number;      //das ist die Version von der Textfile
-
   OBJ_name: string;
+
+  selectedTextfile: TextFile;
 
   versions: FileVersion[];
 
   text: string;
 
-  //input
+  result: any;
+
+  //input settings for the editor
   inputOptions = {
     theme: 'vs',
     language: 'plaintext',
@@ -36,29 +40,32 @@ export class EditFileComponent implements OnInit {
     }
   };
 
-//Zugriff auf die übergebenen Daten
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.OBJ_versionId = this.data.versionId;
-    this.OBJ_name = this.data.name;
+//access to the data
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fileService: FileService) {
+    this.selectedTextfile = this.data.textfile;
     this.versions = this.data.versions;
-    this.text = this.versions[0].lastUpdatedAt;  //später durch fileContent ersetzen !
+    this.text = this.versions[0].fileContent;  //später durch fileContent ersetzen !
+    this.OBJ_name = this.selectedTextfile.name;
 
   }
 
   ngOnInit(): void {
-    console.log('OBJ_VersionId: ' , this.OBJ_versionId, this.OBJ_name, this.versions[0].versionId, this.versions[0].fileContent, this.versions[0].lastUpdatedAt);
+   // console.log('OBJ_VersionId: ' , this.OBJ_versionId, this.OBJ_name, this.versions[0].versionId, this.versions[0].fileContent, this.versions[0].lastUpdatedAt);
   }
 
   closeSaveAction(){
     //save the changes made to the file
+    this.fileService.editFileAndUnlock(this.selectedTextfile, this.text).subscribe(res => this.result = res.toString());
+    console.log("Editor saved     " + this.result);
 
-    console.log("Editor saved");
-    console.log(this.text);
   }
 
   closeCancelAction(){
     //just go back and close the dialog
+    this.fileService.unlockFile(this.selectedTextfile).subscribe(res => this.result = res.toString());
     console.log("Editor closed");
+    console.log(this.result);
+
 
   }
 
