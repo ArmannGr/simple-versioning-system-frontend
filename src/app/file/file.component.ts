@@ -97,11 +97,24 @@ export class FileComponent implements OnInit {
         versions: this.textFile.versions.filter((obj => obj.versionId === this.selectedOption[0]))
       }
     });
-     // this.editFileRef.afterClosed().subscribe(res => {window.location.reload();});
+      this.editFileRef.afterClosed().subscribe(res => {window.location.reload();});
   }
 
   compareFiles() {
-    this.compareFileRef = this.dialog.open(CompareFilesComponent);
+    this.compareFileRef = this.dialog.open(CompareFilesComponent, {
+      width: '1400px',
+      height: '1000px',
+      data: {
+        version1: this.textFile.versions[0].lastUpdatedAt,        //später durch content ersetzen
+        version2: this.textFile.versions[1].lastUpdatedAt,        // später durch content ersetzen
+
+      }
+    });
+
+    this.compareFileRef.afterClosed().subscribe(res => {window.location.reload()});
+
+
+
   }
 
   resetFile(){
