@@ -7,6 +7,7 @@ import {FileVersion} from "../data/types/FileVersion";
 import {FileService} from "../data/service/file.service";
 import { ActivatedRoute } from '@angular/router';
 import {TextFile} from "../data/types/TextFile";
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-file',
@@ -24,7 +25,7 @@ export class FileComponent implements OnInit {
   selectedOption;
   textFile: TextFile;
 
-  constructor(private dialog: MatDialog, private fileService: FileService, private route: ActivatedRoute) { }
+  constructor(private dialog: MatDialog, private fileService: FileService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     this.fileService.getAllFiles().subscribe(files => {
@@ -105,8 +106,8 @@ export class FileComponent implements OnInit {
       width: '1400px',
       height: '1000px',
       data: {
-        version1: this.textFile.versions[0].lastUpdatedAt,        //später durch content ersetzen
-        version2: this.textFile.versions[1].lastUpdatedAt,        // später durch content ersetzen
+        version1: this.textFile.versions[0].fileContent,        //später durch content ersetzen
+        version2: this.textFile.versions[1].fileContent,        // später durch content ersetzen
 
       }
     });
@@ -121,6 +122,11 @@ export class FileComponent implements OnInit {
     this.fileService.resetFileToFormerVersion(this.textFile, this.selectedOption[0]).subscribe( tach => {
       window.location.reload();
     });
+  }
+
+
+  goBack(){
+    this.location.back(); 
   }
 
 

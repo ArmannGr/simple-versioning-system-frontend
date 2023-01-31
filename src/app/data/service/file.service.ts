@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {TextFile} from "../types/TextFile";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import * as url from "url";
+import * as stream from "stream";
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,12 @@ export class FileService {
   }
 
   editFileAndUnlock(textfile: TextFile, content: string){
-    return (this.http.post('api/addVersionAndUnlockFile/' + content, textfile ));
-    //bitte noch passenden Call abkären!
+
+    const options = {params: new HttpParams().set('versionContent', content)};
+
+
+    return (this.http.post('api/addVersionAndUnlockFile' , textfile, options ));
+
   }
 
   unlockFile(textFile: TextFile){
