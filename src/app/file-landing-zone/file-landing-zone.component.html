@@ -1,39 +1,31 @@
 <mat-toolbar>
-
     <span>Versionsverwaltung</span>
     <span class="example-spacer"></span>
-
 </mat-toolbar>
 <br>
 <br>
-
 <input  type="file"
         hidden="true"
         class="file-input"
         (change)="onFileSelected($event)"
         multiple="multiple"
         #fileUpload>
-<button mat-raised-button class="btn" color="primary" style="margin-left: 5%" (click)="fileUpload.click()"><mat-icon>upload_files</mat-icon> </button>
-<button mat-raised-button class="btn" color="primary" (click)="editFile()">Datei edit </button>
-<button mat-raised-button class="btn" color="primary" (click)="revertFile()">zurücksetzen auf ... </button>
-<button mat-raised-button class="btn" color="primary"  (click)="compareFiles()"> Vergleichen </button>
-<button mat-raised-button class="btn" color="primary"> <mat-icon>download</mat-icon> </button>
-
+<button mat-raised-button class="btn" color="primary" style="margin-left: 5%" (click)="fileUpload.click()">Dateiupload <mat-icon>upload_files</mat-icon> </button>
 <br>
 <br>
 <br>
 <br>
 <mat-card class="mat-card">
     <mat-card-content>
-        <h2 class="list-header">Dateiübersicht</h2>
-        <mat-selection-list #files>
-            <mat-list-option *ngFor="let file of fileCollection">
-                {{file}}
-
-            </mat-list-option>
-        </mat-selection-list>
-
-
+        <h2>Alle Dateien:</h2>
+        <mat-chip-list class="mat-chip-list-stacked">
+            <mat-chip *ngFor="let file of fileCollection" selected color="primary" [routerLink]="'/'+ file.name">
+                {{file.name}}
+            </mat-chip>
+        </mat-chip-list>
     </mat-card-content>
 </mat-card>
+<mat-spinner *ngIf="spinner"></mat-spinner>
+
+<p style="margin-left: 45%; margin-top: 30%">Made with ♥️ by High6</p>
 

@@ -18,6 +18,12 @@ import { RevertFileComponent } from './dialogs/revert-file/revert-file.component
 import { CompareFilesComponent } from './dialogs/compare-files/compare-files.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
+import {MatTableModule} from "@angular/material/table";
+import {MatChipsModule} from "@angular/material/chips";
+import { FileComponent } from './file/file.component';
+import {FormsModule} from "@angular/forms";
+import {MonacoEditorModule} from "ngx-monaco-editor";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -25,7 +31,8 @@ import { DatePipe } from '@angular/common';
     FileLandingZoneComponent,
     EditFileComponent,
     RevertFileComponent,
-    CompareFilesComponent
+    CompareFilesComponent,
+    FileComponent
   ],
     imports: [
         BrowserModule,
@@ -40,7 +47,12 @@ import { DatePipe } from '@angular/common';
         HttpClientModule,
         MatDialogModule,
         MatIconModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatTableModule,
+        MatChipsModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        MonacoEditorModule.forRoot()
     ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

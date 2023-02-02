@@ -1,1 +1,16 @@
-<p>Hier sollen die txt-files verglichen werden --> Monaco editor diff editor </p>
+<h1 class="header" mat-dialog-title> Die Textdateien werden verglichen: </h1>
+
+<br>
+<div class="col-md-12 editor editor-size">
+    <ngx-monaco-diff-editor
+            id="diffeditor"
+            [options]="diffOptions"
+            [originalModel]="originalModel"
+            [modifiedModel]="modifiedModel"
+    ></ngx-monaco-diff-editor>
+</div>
+
+<div mat-dialog-actions>
+    <button class="btn-close" mat-raised-button mat-dialog-close (click)="closeCancelAction()">schließen</button>
+
+</div>
