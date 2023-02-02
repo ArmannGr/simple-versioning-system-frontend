@@ -17,3 +17,9 @@
 .list-header{
     font-style: normal;
 }
+
+mat-spinner{
+    bottom: 5%;
+    right: 5%;
+    position: fixed;
+}

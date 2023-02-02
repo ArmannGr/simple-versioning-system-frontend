@@ -19,6 +19,7 @@ export class FileLandingZoneComponent implements OnInit {
     newFileVersion: FileVersion;
     fileVersions: FileVersion[];
 
+    spinner = false;
 
 
     constructor(private dialog: MatDialog, private http: HttpClient, private _snackBar: MatSnackBar,
@@ -33,8 +34,10 @@ export class FileLandingZoneComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.spinner = true;
         this.fileService.getAllFiles().subscribe(files => {
             this.fileCollection = files;
+            this.spinner = false;
         })
     }
 

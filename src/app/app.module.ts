@@ -23,6 +23,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import { FileComponent } from './file/file.component';
 import {FormsModule} from "@angular/forms";
 import {MonacoEditorModule} from "ngx-monaco-editor";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {MonacoEditorModule} from "ngx-monaco-editor";
         MatTableModule,
         MatChipsModule,
         FormsModule,
+        MatProgressSpinnerModule,
         MonacoEditorModule.forRoot()
     ],
   providers: [DatePipe],

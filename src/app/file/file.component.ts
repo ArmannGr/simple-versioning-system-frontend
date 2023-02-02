@@ -24,10 +24,12 @@ export class FileComponent implements OnInit {
   selectedOptions = [];
   selectedOption;
   textFile: TextFile;
+  spinner = false;
 
   constructor(private dialog: MatDialog, private fileService: FileService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
+    this.spinner = true
     this.fileService.getAllFiles().subscribe(files => {
       this.route.params.subscribe( (params) => {
             this.textFile = files.filter(file => file.name === params['fileName'])[0];
@@ -41,6 +43,7 @@ export class FileComponent implements OnInit {
               }
               return 0;
             })
+        this.spinner = false;
             this.fileName = params['fileName'];
       })
     })
