@@ -1,3 +1,31 @@
+# Simple Versioning System - Frontend
+
+Welcome to the Simple Versioning System - Frontend repository! This repository provides a basic implementation of a version control system for tracking changes in software projects. Please note that this repository specifically focuses on the frontend part of the versioning system.
+
+## Overview
+
+- **Versioning System:** A version control system (VCS) is a tool that helps developers track changes in their software projects, collaborate with others, and manage different versions of their codebase.
+
+## Features (Frontend)
+
+This simple versioning system frontend example provides the following features:
+
+1. **User Interface:** A user-friendly web interface for interacting with the versioning system.
+
+2. **Tracking Changes:** keep tracking the changes.
+
+3. **Versioning:** know the version of your file.
+
+## Usage
+
+To use this simple versioning system frontend for your software projects:
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/your-username/versioning-system-frontend.git
+
+
 Current status: 
 
 Main page with file selction: 
