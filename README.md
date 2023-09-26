@@ -20,12 +20,6 @@ This simple versioning system frontend example provides the following features:
 
 To use this simple versioning system frontend for your software projects:
 
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/your-username/versioning-system-frontend.git
-
-
 Current status: 
 
 Main page with file selction: 
