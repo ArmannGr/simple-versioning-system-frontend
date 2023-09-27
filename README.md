@@ -2,6 +2,10 @@
 
 Welcome to the Simple Versioning System - Frontend repository! This repository provides a basic implementation of a version control system for tracking changes in software projects. Please note that this repository specifically focuses on the frontend part of the versioning system.
 
+## Technologies Used
+
+The website was developed using Angular, a modern web framework.
+
 ## Overview
 
 - **Versioning System:** A version control system (VCS) is a tool that helps developers track changes in their software projects, collaborate with others, and manage different versions of their codebase.
